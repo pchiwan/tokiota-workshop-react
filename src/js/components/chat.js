@@ -5,7 +5,7 @@ var Login = require('./login');
 
 var Chat = React.createClass({
     render: function(){
-
+        return null;
     }
 });
 
