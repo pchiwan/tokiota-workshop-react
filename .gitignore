@@ -1,3 +1,4 @@
 node_modules
+server
 app/bundle.js
 app/bundle.css
