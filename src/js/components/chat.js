@@ -4,29 +4,14 @@ var Textbox = require('./textbox');
 var Login = require('./login');
 
 var Chat = React.createClass({
-    getInitialState: function(){
-        return {
-            username: null,
-            messages: []
-        };
-    },
-    _setMessages: function(messages){
-        this.setState({ messages: messages });
-    },
-    _setUsername: function(username){
-        this.setState({ username: username });
-    },
-    render: function(){
-        if(this.state.username){
-            return (
-                <div id="wrapper">
-                    <Messages messages={this.state.messages} _setMessages={this._setMessages}/>
-                    <Textbox username={this.state.username} />
-                </div>
-            );
-        }
-        return <Login _setUsername={this._setUsername} />;
-    }
+    
+    getDefaultProps: function(){},
+
+    // Invoked once before the component is mounted, sets the initial state
+    getInitialState: function(){},
+
+    // virtual representation of a native DOM component, does not modify component state
+    render: function(){}
 });
 
 module.exports = Chat;
