@@ -9,24 +9,24 @@
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/mfmontenegro/tokiota-workshop-react/issues"
-  },
   "homepage": "https://github.com/mfmontenegro/tokiota-workshop-react#readme",
+  "endPoints": {
+    "js_dest": "./app/bundle.js",
+    "js_entry_point": "./src/js/app.js",
+    "js_files": "./src/js/**/*.js",
+    "css_dest": "./app/",
+    "css_files": "./src/stylesheets/**/*.css"
+  },
   "devDependencies": {
-    "babel-preset-es2015": "^6.5.0",
-    "babel-preset-react": "^6.5.0",
-    "babelify": "^7.2.0",
-    "browserify": "^13.0.0",
-    "fs": "0.0.2",
-    "gulp": "^3.9.0",
-    "gulp-concat-css": "^2.2.0",
-    "react": "^0.14.7",
-    "react-dom": "^0.14.7",
-    "socket.io-client": "^1.3.7"
+    "babel-preset-react": "^6.11.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.0.1",
+    "gulp": "^3.9.1",
+    "gulp-concat-css": "^2.3.0"
   },
   "dependencies": {
-    "bluebird": "^3.3.1",
-    "request-promise": "^2.0.1"
+    "jquery": "^3.0.0",
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0"
   }
 }

@@ -1,13 +1,18 @@
 var globals = require('../globals');
 var URI = globals.URI;
-var rp = require('request-promise');
+var $ = require('jquery');
 
 var Login = (function(){
     var Login = function(){
         var self = this;
 
         self.authenticate = function(username){
-            return rp({ method: "POST", uri: URI.base + URI.api + URI.login, body: {username: username}, json: true});
+            return $.ajax({
+                method: "POST",
+                url: URI.base + URI.api + URI.login,
+                data: { username: username },
+                dataType: "json"
+            });
         };
     };
     return new Login();

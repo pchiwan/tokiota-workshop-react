@@ -3,29 +3,26 @@ var concatCss = require('gulp-concat-css');
 var fs = require('fs');
 var babelify = require("babelify");
 var browserify = require('browserify');
-var globals = require('./src/js/globals');
-var paths = globals.paths;
+var endPoints = JSON.parse(fs.readFileSync('./package.json')).endPoints;
 
-var bundler = browserify(paths.js_entry_point);
-bundler.transform(babelify, {presets: ['es2015', 'react']});
+var bundler = browserify(endPoints.js_entry_point);
+bundler.transform(babelify, {presets: ['react']});
 
-gulp.task('bundle-js', function () {
+gulp.task('bundle-js', function(){
 	bundler.bundle()
     	.on('error', function (err) { console.error(err); })
-    	.pipe(fs.createWriteStream(paths.js_dest + '/bundle.js'));
+    	.pipe(fs.createWriteStream(endPoints.js_dest));
 });
 
 gulp.task('bundle-css', function () {
-    return gulp.src(paths.css_files)
+    return gulp.src(endPoints.css_files)
         .pipe(concatCss("bundle.css"))
-        .pipe(gulp.dest(paths.css_dest));
+        .pipe(gulp.dest(endPoints.css_dest));
 });
 
-gulp.task('watch-js-css', function(){
-    gulp.watch('./src/js/**/*.js', ['bundle-js']);
-    gulp.watch(paths.css_files, ['bundle-css']);
+gulp.task('watch', function(){
+    gulp.watch(endPoints.js_files, ['bundle-js']);
+	gulp.watch(endPoints.css_files, ['bundle-css']);
 });
 
-gulp.task('default', ['bundle-js', 'bundle-css']);
-
-gulp.task('watch', ['bundle-js', 'bundle-css', 'watch-js-css']);
+gulp.task('default', ['bundle-js', 'bundle-css', 'watch']);
