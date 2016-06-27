@@ -4,7 +4,7 @@ var socket = globals.socket;
 
 var Textbox = React.createClass({
     render: function(){
-        return null;
+        return false;
     }
 });
 

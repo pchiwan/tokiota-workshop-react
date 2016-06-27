@@ -5,7 +5,7 @@ var socket = globals.socket;
 
 var Messages = React.createClass({
     render: function(){
-        return null;
+        return false;
     }
 });
 
