@@ -3,7 +3,7 @@ var concatCss = require('gulp-concat-css');
 var fs = require('fs');
 var babelify = require("babelify");
 var browserify = require('browserify');
-var globals = require('./src/js/globals/globals');
+var globals = require('./src/js/globals');
 var paths = globals.paths;
 
 var bundler = browserify(paths.js_entry_point);
@@ -22,7 +22,7 @@ gulp.task('bundle-css', function () {
 });
 
 gulp.task('watch-js-css', function(){
-    gulp.watch(paths.js_files, ['bundle-js']);
+    gulp.watch('./src/js/**/*.js', ['bundle-js']);
     gulp.watch(paths.css_files, ['bundle-css']);
 });
 

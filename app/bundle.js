@@ -97758,7 +97758,7 @@ module.exports = Chat;
 'use strict';
 
 var React = require('react');
-var services = require('../services/services');
+var services = require('../services');
 
 var Login = React.createClass({
     displayName: 'Login',
@@ -97785,7 +97785,7 @@ var Login = React.createClass({
 
 module.exports = Login;
 
-},{"../services/services":642,"react":411}],633:[function(require,module,exports){
+},{"../services":640,"react":411}],633:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -97818,7 +97818,7 @@ module.exports = Message;
 
 var React = require('react');
 var Message = require('./message');
-var globals = require('../globals/globals');
+var globals = require('../globals');
 var socket = globals.socket;
 
 var Messages = React.createClass({
@@ -97837,7 +97837,6 @@ var Messages = React.createClass({
             'div',
             { id: 'messages' },
             this.props.messages.map(function (message, i) {
-                console.log(message);
                 return React.createElement(Message, { key: i, text: message.text, username: message.username });
             })
         );
@@ -97846,11 +97845,11 @@ var Messages = React.createClass({
 
 module.exports = Messages;
 
-},{"../globals/globals":636,"./message":633,"react":411}],635:[function(require,module,exports){
+},{"../globals":636,"./message":633,"react":411}],635:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
-var globals = require('../globals/globals');
+var globals = require('../globals');
 var socket = globals.socket;
 
 var Textbox = React.createClass({
@@ -97859,29 +97858,33 @@ var Textbox = React.createClass({
     _handleSubmit: function _handleSubmit(event) {
         event.preventDefault();
 
+        if (!(event.target.text.value.length > 0)) return;
+
         var message = {
             username: this.props.username,
             text: event.target.text.value
         };
 
-        if (message.text.length > 0) {
-            event.target.text.value = null;
-            socket.emit('message:send', message);
-        }
+        event.target.text.value = null;
+        socket.emit('message:send', message);
+    },
+    _handleKeyUp: function _handleKeyUp(event) {
+        if (event.target.value.length > 0) return this.refs.submit.classList.add('active');
+        return this.refs.submit.classList.remove('active');
     },
     render: function render() {
         return React.createElement(
             'form',
             { id: 'text-box', onSubmit: this._handleSubmit },
-            React.createElement('input', { type: 'text', id: 'text', placeholder: 'Your message', autoComplete: 'off' }),
-            React.createElement('button', { type: 'submit' })
+            React.createElement('input', { type: 'text', id: 'text', placeholder: 'Your message', autoComplete: 'off', onKeyUp: this._handleKeyUp }),
+            React.createElement('button', { type: 'submit', className: "fa fa-paper-plane", ref: "submit" })
         );
     }
 });
 
 module.exports = Textbox;
 
-},{"../globals/globals":636,"react":411}],636:[function(require,module,exports){
+},{"../globals":636,"react":411}],636:[function(require,module,exports){
 'use strict';
 
 var paths = require('./paths');
@@ -97926,7 +97929,16 @@ module.exports = {
 },{}],640:[function(require,module,exports){
 'use strict';
 
-var globals = require('../globals/globals');
+var login = require('./login');
+
+module.exports = {
+    login: login
+};
+
+},{"./login":641}],641:[function(require,module,exports){
+'use strict';
+
+var globals = require('../globals');
 var URI = globals.URI;
 var rp = require('request-promise');
 
@@ -97943,33 +97955,4 @@ var Login = function () {
 
 module.exports = Login;
 
-},{"../globals/globals":636,"request-promise":413}],641:[function(require,module,exports){
-"use strict";
-
-var rp = require('request-promise');
-
-var Message = function () {
-    var Message = function Message() {
-        var self = this;
-
-        self.send = function () {
-            return rp({ method: "POST", uri: URI.base + URI.api + URI.message, body: { username: username }, json: true });
-        };
-    };
-    return new Message();
-}();
-
-module.exports = Message;
-
-},{"request-promise":413}],642:[function(require,module,exports){
-'use strict';
-
-var login = require('./login');
-var message = require('./message');
-
-module.exports = {
-    login: login,
-    message: message
-};
-
-},{"./login":640,"./message":641}]},{},[630]);
+},{"../globals":636,"request-promise":413}]},{},[630]);

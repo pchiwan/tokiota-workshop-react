@@ -1,6 +1,6 @@
 var React = require('react');
 var Message = require('./message');
-var globals = require('../globals/globals');
+var globals = require('../globals');
 var socket = globals.socket;
 
 var Messages = React.createClass({

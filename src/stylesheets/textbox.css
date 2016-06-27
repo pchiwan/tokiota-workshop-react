@@ -28,6 +28,14 @@
     cursor: pointer;
     border-radius: 50%;
     background: white;
-    color: transparent;
+    color: #312D51;
+    font-size: 15px;
+    text-indent: -2px;
+    transition: transform 0.1s;
+    transform: scale(0);
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+#text-box button.active {
+    transform: scale(1);
 }

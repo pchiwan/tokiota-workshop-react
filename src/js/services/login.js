@@ -1,4 +1,4 @@
-var globals = require('../globals/globals');
+var globals = require('../globals');
 var URI = globals.URI;
 var rp = require('request-promise');
 

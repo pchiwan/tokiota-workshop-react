@@ -1,5 +1,5 @@
 var React = require('react');
-var services = require('../services/services');
+var services = require('../services');
 
 var Login = React.createClass({
     _handleSubmit: function(event){
