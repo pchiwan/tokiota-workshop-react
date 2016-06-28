@@ -2,8 +2,24 @@ var React = require('react');
 var services = require('../services');
 
 var Login = React.createClass({
+    _handleSubmit: function(event){
+        event.preventDefault();
+
+        var self = this,
+            promise = services.login.authenticate(event.target.username.value);
+
+        promise.then(function(response) {
+            if (response.success) {
+                self.props.setUsername(response.username);
+            }
+        });
+    },
     render: function(){
-        return false;
+        return (
+            <form id="login" onSubmit={this._handleSubmit}>
+                <input type="text" id="username" placeholder="Username" autoComplete="off" />
+            </form>
+        );
     }
 });
 
