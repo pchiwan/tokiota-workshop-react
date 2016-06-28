@@ -19,16 +19,18 @@ var Textbox = React.createClass({
         event.target.text.value = null;
     },
     _handleKeyUp: function(event){
-        if (event.target.text.value) {
+        if (event.target.value) {
             return this.refs.submit.classList.add("active");
         }
         return this.refs.submit.classList.remove("active");
     },
     render: function(){
-        <form id="text-box" onSubmit={this._handleSubmit}>
-            <input type="text" id="text" placeholder="Your message" autoComplete="off" onKeyUp={this._handleKeyUp} />
-            <button type="submit" className={"fa fa-paper-plane"} ref={"submit"}></button>
-        </form>
+        return ( 
+            <form id="text-box" onSubmit={this._handleSubmit}>
+                <input type="text" id="text" placeholder="Your message" autoComplete="off" onKeyUp={this._handleKeyUp} />
+                <button type="submit" className={"fa fa-paper-plane"} ref={"submit"}></button>
+            </form>
+        );
     }
 });
 

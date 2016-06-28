@@ -37056,12 +37056,12 @@ var Message = React.createClass({
             { className: "message" },
             React.createElement(
                 "span",
-                { className: username },
+                { className: "username" },
                 this.props.username
             ),
             React.createElement(
                 "span",
-                { className: text },
+                { className: "text" },
                 this.props.text
             )
         );
@@ -37085,7 +37085,7 @@ var Messages = React.createClass({
     _handleMessageSpread: function (message) {
         var messages = this.props.messages;
         messages.push(message);
-        this.props.setMessages(message);
+        this.props.setMessages(messages);
     },
     render: function () {
         return React.createElement(
@@ -37124,13 +37124,13 @@ var Textbox = React.createClass({
         event.target.text.value = null;
     },
     _handleKeyUp: function (event) {
-        if (event.target.text.value) {
+        if (event.target.value) {
             return this.refs.submit.classList.add("active");
         }
         return this.refs.submit.classList.remove("active");
     },
     render: function () {
-        React.createElement(
+        return React.createElement(
             'form',
             { id: 'text-box', onSubmit: this._handleSubmit },
             React.createElement('input', { type: 'text', id: 'text', placeholder: 'Your message', autoComplete: 'off', onKeyUp: this._handleKeyUp }),
@@ -37169,7 +37169,8 @@ module.exports = socket;
 
 },{"./uri":224,"socket.io-client":203}],224:[function(require,module,exports){
 module.exports = {
-    base: 'http://198.211.123.157:3000',
+    //base: 'http://198.211.123.157:3000',
+    base: 'http://localhost:3000',
     api: '/api',
     login: '/login',
     message: '/message'
